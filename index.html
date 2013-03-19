@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <script src="zepto.js"></script>
+    <script>
+      $(function () {
+        $('button[href="#trollme"]').click(function(e) {
+          e.preventDefault();
+          $.ajax({
+            url: 'http://ws.spotify.com/search/1/track.json?q=trololo',
+            success: function (data) {
+              var len = data.tracks.length,
+                idx = Math.floor(Math.random() * len),
+                track = data.tracks[idx].href,
+                embedUrl = 'https://embed.spotify.com/?view=&uri=' + track;
+              $('#play-button').attr('src', embedUrl);
+            }
+          });
+        });
+      });
+    </script>
+    <style>
+      body {
+        background: url(suicide_booth.gif);
+      }
+      #content {
+        background: white;
+        width: 255px;
+        margin: 0 auto;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="content">
+      <div>
+        <button href="#trollme">
+          <img src="trollface.jpg">
+        </button>
+      </div>
+      <div>
+        <iframe id="play-button" src="" width="250" height="80" frameborder="0" allowtransparency="true"></iframe>
+      </div>
+    </div>
+  </body>
+</html>
